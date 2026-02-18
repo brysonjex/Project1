@@ -16,12 +16,31 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt
 
       - name: Run analysis script
         run: python src/analysis.py
+
+      - name: Validate output files and ranking order
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          from pathlib import Path
+
+          table = Path('outputs/ranking_table.csv')
+          plot = Path('outputs/ranking_plot.png')
+          assert table.exists(), 'outputs/ranking_table.csv was not created'
+          assert plot.exists(), 'outputs/ranking_plot.png was not created'
+
+          df = pd.read_csv(table)
+          assert not df.empty, 'ranking table is empty'
+          assert df['Rank'].tolist() == list(range(1, len(df) + 1)), 'Rank column is not sequential from 1'
+          assert df['Mean Rating'].is_monotonic_decreasing, 'Mean Rating is not sorted descending'
+          print('Output validation passed.')
+          PY
 
       - name: Upload analysis artifacts
         uses: actions/upload-artifact@v4
