@@ -1,0 +1,7 @@
+The most significant change from Project 1 to this workflow was the transition from a one-time analysis to a completely automated and reproducible workflow. While in Project 1, I was focused on answering the research question manually through exploratory steps. However, in this workflow, I was focused on structure, reproducibility, and automation. While I was manually running my analysis, this workflow now automates and controls my analysis completely through GitHub Actions.
+
+The control is now in the repository and workflow file, not my local environment. The analysis is now run in the cloud and is triggered by my commits. It now produces standardized outputs every time, making it transparent and reviewable, rather than depending on my environment and manual control.
+
+If I had one more week, I would like to enhance my ranking methodology by incorporating statistical comparisons between the top-ranked programs and possibly adding more visualizations to explain differences in ratings. I would also like to add more validation checks to ensure proper detection of rating columns each time.
+
+An application of this workflow, if I were working in an accounting setting, would be in an Auditing class. One possible application would be ranking internal control deficiencies based on severity scores from audit testing. I could create a similar workflow to rank internal control deficiencies and create a visual output.
